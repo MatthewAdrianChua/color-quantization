@@ -4,3 +4,4 @@ scikit-image
 matplotlib
 Flask
 opencv-python-headless
+gunicorn
