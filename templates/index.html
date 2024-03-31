@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Quantization</title>
+</head>
+<body>
+    <h1>Color Quantization</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*">
+        <label for="colors">Number of Colors:</label>
+        <input type="number" name="colors" id="colors" min="2" max="256" value="256">
+        <input type="submit" value="Upload">
+    </form>
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+</body>
+</html>
