@@ -31,9 +31,17 @@ from flask import send_file
 
 app = Flask(__name__)
 
+def subsample_data(image):
+    # 2:1 subsampling in horizontal and vertical directions
+    sampled_indices = np.random.choice(image.shape[0], size=image.shape[0] // 2, replace=False)
+    sampled_image = image[sampled_indices]
+    return sampled_image
+    
 def calculate_weights(image):
+
+    subsampled_image = subsample_data(image)
     # Convert image to one-dimensional array
-    pixels = image.reshape(-1, image.shape[-1])
+    pixels = subsampled_image.reshape(-1, subsampled_image.shape[-1])
 
     #print(pixels.size)
 
