@@ -28,25 +28,28 @@ import time
 from flask import Flask, request, render_template
 import cv2
 from flask import send_file
+import skimage.measure
 
 app = Flask(__name__)
 
 def subsample_data(image):
     # 2:1 subsampling in horizontal and vertical directions
-    sampled_indices = np.random.choice(image.shape[0], size=image.shape[0] // 2, replace=False)
-    sampled_image = image[sampled_indices]
+    sampled_image = skimage.measure.block_reduce(image, block_size=(2,2,1), func=np.mean)
     return sampled_image
     
 def calculate_weights(image):
 
+    print(image.shape)
     subsampled_image = subsample_data(image)
+    print(subsampled_image.shape)
+
     # Convert image to one-dimensional array
     pixels = subsampled_image.reshape(-1, subsampled_image.shape[-1])
 
     #print(pixels.size)
 
     # Calculate histogram of pixel colors
-    hist, _ = np.histogramdd(pixels, bins=256)
+    hist, _ = np.histogram(pixels, bins=pixels.size)
 
     # Flatten the histogram to a 1D array
     flattened_hist = hist.flatten()
@@ -136,7 +139,8 @@ def upload_file():
             return render_template('index.html', error='No selected file')
         if file:
             original = io.imread(file)
-            original = original[:,:,0:3]  # remove alpha channel
+
+            #original = original[:,:,0:3]  # remove alpha channel
             # Get number of colors from form input
             n_colors = int(request.form['colors'])
             
