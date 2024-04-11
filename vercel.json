@@ -4,6 +4,6 @@
         {"src": "colorQuanti,py", "use": "@vercel/python"}
     ],
     "routes": [
-        {"src": "/(.*)", "dest": "colorQuanti.py"}
+        {"src": "/(.*)", "dest": "app.py"}
     ]
 }
