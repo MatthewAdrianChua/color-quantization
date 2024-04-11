@@ -15,12 +15,19 @@
         <div id="inputContainer">
         <div id="input">
             <form method="POST" enctype="multipart/form-data">
+            <div id="fileContainer">
                 <input type="file" id="file" name="file" accept="image/*">
                 <label for="colors">Number of Colors:</label>
                 <input type="number" name="colors" id="colors" min="2" max="256" value="256">
+            </div>
                 <div id="submitDiv">
                     <input type="submit" id="submit" value="Upload">
                 </div>
+                {% if error %}
+                        <div id="errorContainer">
+                            <p id="error">{{error}}</p>
+                        </div>
+                    {% endif %}
             </form>
             <div id="loading">
                 <div id="center">
@@ -36,13 +43,13 @@
             <div>
                 <h2>Original Image:</h2>
                 <div id="orig">
-                    <img src="data:image/jpeg;base64,{{orig}}" alt="Logo" id="origImage">
+                    <img src="data:image/jpeg;base64,{{orig}}" onerror="this.onerror=null;this.src='/static/images/image.png';" alt="Logo" id="origImage">
                 </div>
             </div>
             <div>
                 <h2>Quantized Image:</h2>
                 <div id="quantized">
-                    <img src="data:image/jpeg;base64,{{img_b64}}" alt="Logo" id="quantizedImage">
+                    <img src="data:image/jpeg;base64,{{img_b64}}" onerror="this.onerror=null;this.src='/static/images/image.png';" alt="Logo" id="quantizedImage">
                 </div>
             </div>
         </div>

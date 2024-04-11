@@ -27,8 +27,10 @@ import cv2
 from flask import send_file
 import skimage.measure
 import base64
+import os
 
 app = Flask(__name__)
+app.config['MAX_CONTENT_LENGTH'] = 70 * 1024 
 
 def subsample_data(image):
     # 2:1 subsampling in horizontal and vertical directions
@@ -140,7 +142,7 @@ def upload_file():
             return render_template('index.html', error='No selected file')
         if file:
             original = io.imread(file)
-
+ 
             #original = original[:,:,0:3]  # remove alpha channel
             # Get number of colors from form input
             n_colors = int(request.form['colors'])
@@ -177,6 +179,11 @@ def upload_file():
 def download_file():
 
     return send_file('quantized_image.jpg', as_attachment=True)
+
+@app.errorhandler(413)
+def page_not_found(e):
+    print("ERROR")
+    return render_template('index.html', error='Sorry only a maximum file size of 70KB is allowed due to the limitations of Render.com please select an image of lower size')
 
 if __name__ == '__main__':
     app.run(debug=True)

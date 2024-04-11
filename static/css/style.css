@@ -92,6 +92,22 @@ html,body{
   margin-bottom: 10px;
 }
 
+#errorContainer{
+    display: flex;
+    justify-content: center;
+}
+
+#error{
+    color: red;
+    font-size: 15px;
+    text-align: center;
+}
+
+#fileContainer{
+    display: flex;
+    justify-content: center;
+}
+
 #downloadContainer{
     display: flex;
     justify-content: center;
