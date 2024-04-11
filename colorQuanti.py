@@ -183,7 +183,7 @@ def download_file():
 @app.errorhandler(413)
 def page_not_found(e):
     print("ERROR")
-    return render_template('index.html', error='Sorry only a maximum file size of 70KB is allowed due to the limitations of Render.com please select an image of lower size')
+    return render_template('index.html', error='Sorry only a maximum file size of 150KB is allowed due to the limitations of Render.com please select an image of lower size')
 
 if __name__ == '__main__':
     app.run(debug=True)
