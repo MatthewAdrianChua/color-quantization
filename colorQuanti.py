@@ -20,16 +20,12 @@ plt.show()
 '''
 
 import numpy as np
-from sklearn.cluster import KMeans
 from skimage import io
 from sklearn.metrics import pairwise_distances_argmin_min
-import matplotlib.pyplot as plt
-import time
 from flask import Flask, request, render_template
 import cv2
 from flask import send_file
 import skimage.measure
-from base64 import b64encode
 import base64
 
 app = Flask(__name__)
@@ -157,8 +153,6 @@ def upload_file():
 
             weights = assign_weights(image=original, possible_colors=weights)
 
-            start_time = time.time()
-
             # Perform weighted k-means clustering
             cluster_centers, labels = kmeans_weighted(arr, weights, n_colors)
 
@@ -167,13 +161,6 @@ def upload_file():
 
             # Assign each pixel to its nearest cluster center
             less_colors = cluster_centers[labels].reshape(original.shape).astype('uint8')
-
-            # Stop the timer
-            end_time = time.time()
-
-            # Calculate the elapsed time
-            elapsed_time = end_time - start_time
-            print("Elapsed Time:", elapsed_time, "seconds")
 
             # Save quantized image
             cv2.imwrite('quantized_image.jpg', cv2.cvtColor(less_colors, cv2.COLOR_RGB2BGR))
