@@ -29,6 +29,8 @@ from flask import Flask, request, render_template
 import cv2
 from flask import send_file
 import skimage.measure
+from base64 import b64encode
+import base64
 
 app = Flask(__name__)
 
@@ -125,9 +127,12 @@ def kmeans_weighted(X, weights, K, max_iter=100):
     
     return centers, labels
 
+less_colors = np.empty
+
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
+    global less_colors
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
@@ -173,9 +178,20 @@ def upload_file():
             # Save quantized image
             cv2.imwrite('quantized_image.jpg', cv2.cvtColor(less_colors, cv2.COLOR_RGB2BGR))
 
-            # Render template with the image path
-            return send_file('quantized_image.jpg', as_attachment=True)
+            jpg_imgOrig = cv2.imencode('.jpg', cv2.cvtColor(original, cv2.COLOR_RGB2BGR))
+            orig = base64.b64encode(jpg_imgOrig[1]).decode('utf-8')
+            
+            jpg_img = cv2.imencode('.jpg', cv2.cvtColor(less_colors, cv2.COLOR_RGB2BGR))
+            img_b64 = base64.b64encode(jpg_img[1]).decode('utf-8')
+            return render_template('index.html', img_b64=img_b64, orig=orig)
     return render_template('index.html')
+
+@app.route('/download', methods=['POST'])
+def download_file():
+    # Read the quantized image file
+    cv2.imwrite('quantized_image.jpg', cv2.cvtColor(less_colors, cv2.COLOR_RGB2BGR))
+
+    return send_file('quantized_image.jpg', as_attachment=True)
 
 if __name__ == '__main__':
     app.run(debug=True)

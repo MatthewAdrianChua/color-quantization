@@ -1,0 +1,337 @@
+#navbar{
+    height: 100px;
+    background-color: #333333;
+    margin: 0px;
+    padding: 0px;
+    position: sticky;
+    border-bottom: solid black;
+    position: sticky;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html,body{
+    height:100%;
+     min-height:100%; 
+     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+
+#main{
+    position: relative;
+    overflow: hidden;
+}
+
+#navBottom{
+    margin-top: 60px;
+    display: flex;
+    padding-left: 20px;
+    color: white;
+}
+
+#loading {
+    width: 35px;
+    height: 35px;
+    display: none;
+    background: url(/static/images/loading.gif) no-repeat;
+    cursor: wait;
+    position: absolute;
+    }
+
+#center{
+    display: flex;
+    justify-content: center;
+}
+
+#loadingContainer{
+    text-align: center;
+}
+
+#mainContainer{
+    height: 3650px;
+    width: 1550px;
+    background-color: lightgray;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-bottom: 0px;
+    box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+    margin: auto;
+}
+
+#title{
+    padding-left: 20px;
+    padding-top: 20px;
+    color: white;
+}
+
+#inputContainer{
+    display: flex;
+    justify-content: center;
+}
+#input{
+    display: flex;
+    justify-content: center;
+    height: 100px;
+    padding-top: 50px;
+    border: 5px black;
+    border-style: dotted;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    width: 70%;
+}
+
+#submit{
+    color: white;
+  background-color: #555;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#downloadContainer{
+    display: flex;
+    justify-content: center;
+}
+
+#download{
+    color: white;
+  background-color: #555;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 50px;
+  width: 200px;
+}
+
+#aboutSeparate{
+    margin-top: 100px;
+    border-bottom: solid black;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+#exampleSeparate{
+    margin-top: 0px;
+    border-bottom: solid black;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 50px;
+}
+
+#sourceSeparate{
+    margin-top: 100px;
+    border-bottom: solid black;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 50px;
+}
+
+#information{
+    margin-top: 50px;
+    padding-left: 100px;
+}
+
+#examples{
+    margin-top: 50px;
+    padding-left: 100px;
+}
+
+#sources{
+    margin-top: 50px;
+    padding-left: 100px;
+    margin-bottom: 20px;
+}
+
+#submitDiv{
+    display: flex;
+    justify-content: center;
+}
+
+#output{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#orig{
+    height: 300px;
+    width: 500px;
+    border: 5px solid white;
+    background-color: white;
+    padding: 50px;
+    margin: 50px;
+    border-radius: 10%;
+}
+
+#quantized{
+    height: 300px;
+    width: 500px;
+    border: 5px solid white;
+    background-color: white;
+    padding: 50px;
+    margin: 50px;
+    border-radius: 10%;
+}
+
+#origImage{
+    width: 450px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    margin-left: 25px;
+}
+
+#quantizedImage{
+    width: 450px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    margin-left: 25px;
+}
+
+#aboutContainer{
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    padding-left: 150px;
+    padding-right: 150px;
+    padding-bottom: 150px;
+}
+
+#aboutQuanti{
+    background-color: white;
+    box-shadow: 6px 6px 10px 0px rgba(0, 0, 0, 0.4);
+    padding: 20px;
+    border-radius: 25px;
+}
+
+#aboutWSM{
+    margin-top: 20px;
+    background-color: white;
+    box-shadow: 6px 6px 10px 0px rgba(0, 0, 0, 0.4);
+    padding: 20px;
+    border-radius: 25px;
+}
+
+#WSMpic{
+    height: 650px;
+}
+
+#descriptionContainer{
+    display:flex;
+}
+
+#descriptionContainerWSM{
+    display:flex;
+}
+
+#descriptionQuanti{
+    display:flex;
+    margin-left: 10px;
+    font-size: 20px;
+    font-weight: 100;
+    padding-top: 20px;
+}
+
+#exampleContainer{
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+#example1Container{
+    width: 380px;
+    background-color: white;
+    padding-left: 17px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 25px;
+    margin: 10px;
+    box-shadow: 6px 6px 10px 0px rgba(0, 0, 0, 0.4);
+}
+
+#boats{
+    height: 350px;
+    width: 360px;
+    border-radius: 25px;
+}
+
+#boatsQuantized{
+    height: 350px;
+    width: 360px;
+    border-radius: 25px;
+}
+
+#example2Container{
+    width: 380px;
+    background-color: white;
+    padding-left: 17px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 25px;
+    margin: 10px;
+    box-shadow: 6px 6px 10px 0px rgba(0, 0, 0, 0.4);
+}
+
+#airplane{
+    height: 350px;
+    width: 360px;
+    border-radius: 25px;
+}
+
+#airplaneQuantized{
+    height: 350px;
+    width: 360px;
+    border-radius: 25px;
+}
+
+#example3Container{
+    width: 380px;
+    background-color: white;
+    padding-left: 17px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 25px;
+    margin: 10px;
+    box-shadow: 6px 6px 10px 0px rgba(0, 0, 0, 0.4);
+}
+
+#teamContainer{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 50px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: #333333;
+    width: 100%;
+    border-top: solid black;
+    color: white;
+}
+
+#teams{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+}
+
+#github{
+    margin-top: 10px;
+}
+
+#sourceContainer{
+    display: flex;
+    justify-content: center;
+}
+
+#source{
+    background-color: white;
+    padding: 20px;
+    border-radius: 25px;
+}

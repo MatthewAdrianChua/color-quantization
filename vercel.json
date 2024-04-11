@@ -1,0 +1,9 @@
+{
+    "version": 2,
+    "builds": [
+        {"src": "colorQuanti,py", "use": "@vercel/python"}
+    ],
+    "routes": [
+        {"src": "/(.*)", "dest": "colorQuanti.py"}
+    ]
+}

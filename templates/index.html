@@ -3,18 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
     <title>Color Quantization</title>
 </head>
 <body>
-    <h1>Color Quantization</h1>
-    <form method="POST" enctype="multipart/form-data">
-        <input type="file" name="file" accept="image/*">
-        <label for="colors">Number of Colors:</label>
-        <input type="number" name="colors" id="colors" min="2" max="256" value="256">
-        <input type="submit" value="Upload">
-    </form>
-    {% if error %}
-        <p>{{ error }}</p>
-    {% endif %}
+    <div id="main">
+    <div id="navbar">
+        <h1 id="title"> Weighted Sort Means Color Quantization</h1>
+    </div>
+    <div id="mainContainer">
+        <div id="inputContainer">
+        <div id="input">
+            <form method="POST" enctype="multipart/form-data">
+                <input type="file" id="file" name="file" accept="image/*">
+                <label for="colors">Number of Colors:</label>
+                <input type="number" name="colors" id="colors" min="2" max="256" value="256">
+                <div id="submitDiv">
+                    <input type="submit" id="submit" value="Upload">
+                </div>
+            </form>
+            <div id="loading">
+                <div id="center">
+                <div id="loadingContainer"> 
+                    <img src="{{ url_for('static', filename='images/loading.gif')}}">
+                    <h2>Quantizing your image, this may take a few minutes depending on the file size</h2>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+        <div id="output">
+            <div>
+                <h2>Original Image:</h2>
+                <div id="orig">
+                    <img src="data:image/jpeg;base64,{{orig}}" alt="Logo" id="origImage">
+                </div>
+            </div>
+            <div>
+                <h2>Quantized Image:</h2>
+                <div id="quantized">
+                    <img src="data:image/jpeg;base64,{{img_b64}}" alt="Logo" id="quantizedImage">
+                </div>
+            </div>
+        </div>
+        {% if img_b64 %}
+        <div id="downloadContainer">
+            <form method="POST" action="/download">
+                <button type="submit" id="download">Download Quantized Image</button>
+            </form>
+        </div>
+        {% endif %}
+        <div id="aboutSeparate"></div>
+        <h1 id="information">Information</h1>
+        <div id="aboutContainer">
+            <div id="about">
+                <div id="aboutQuanti">
+                    <h2 id="whatIs">What is Color Quantization?</h2>
+                    <div id="descriptionContainer">
+                        <img src="{{ url_for('static', filename='images/colorQuantiExample.png') }}">
+                        <p id="descriptionQuanti">Color quantization is a digital image processing technique that aims to reduce the number of distinct colors in an image while maintaining its overall visual quality. This is achieved by grouping similar colors together and representing them with a single representative color, effectively reducing the image’s color palette. The primary goal of color quantization is to optimize image storage and transmission by reducing the amount of data required to represent the image without significantly affecting its appearance or quality (Cloudinary, 2023).</p>
+                    </div>
+                </div>
+                <div id="aboutWSM">
+                    <h2 id="whatIs">About the algorithm used</h2>
+                    <div id="descriptionContainerWSM">
+                    <p id="descriptionQuanti">
+                        The modified algorithm, also known as the Weighted Sort-Means algorithm (WSM), functions similarly to the k-means algorithm, except that it builds upon some of the weaknesses of the k-means algorithm by adding modifications such as:
+    data sampling
+    WSM speeds up the k-means algorithm by decreasing the amount of data to be sorted. It does this by subsampling the input data. The researchers used two approaches to subsampling: (1) sampling ¼ of the input image pixels at a time by taking a 2:1 (horizontal : vertical) chunk, and (2) sampling only the pixels with unique colors. The researchers noted that the second method was reduces the image data further due to the fact that images often contain many duplicate colors
+    sample weighting
+    The approach WSM takes to data sampling comes at the cost of disregarding the color distribution of the original image; this problem is resolved by assigning a weight to each point that is proportional to its frequency. This is similar to implementing a 1D color histogram. The weights are then normalized by the number of pixels in the image.
+    sort-means algorithm
+    The assignment phase of the k-means algorithm often leads to many redundant distance calculations. WSM fixes this by implementing sort-means, which essentially sorts the distance values associated with each data point, and the centers of each cluster; the logic is that once a sufficient center is found, the remaining centers can be ignored, and their respective calculations can be avoided. This is done with respect to each data point.
+    
+                    </p>
+                    <img src="{{ url_for('static', filename='images/WSM.jpg') }}" id="WSMpic">
+                </div>
+                </div>
+            </div>
+        </div>
+        <div id="exampleSeparate"></div>
+        <h1 id="examples">Examples</h1>
+        <div id="exampleContainer">
+            <div id="example1Container">
+                <div>
+                    <h2>Boats</h2>
+                    <p>In this example the image "boats" was quantized to only have a maximum color count of 12</p>
+                </div>
+                <div>
+                <img src="{{ url_for('static', filename='images/boats.jfif') }}" id="boats">
+                </div>
+                <div>
+                <img src="{{ url_for('static', filename='images/boatsQuantized.jfif') }}" id="boatsQuantized">
+                </div>
+            </div>
+            <div id="example2Container">
+                <div>
+                    <h2>Airplane</h2>
+                    <p>In this example the image "airplane" was quantized to only have a maximum color count of 32</p>
+                </div>
+                <div>
+                <img src="{{ url_for('static', filename='images/airplane.jfif') }}" id="airplane">
+                </div>
+                <div>
+                <img src="{{ url_for('static', filename='images/airplaneQuantized.jfif') }}" id="airplaneQuantized">
+                </div>
+            </div>
+            <div id="example3Container">
+                <div>
+                    <h2>Baboon</h2>
+                    <p>In this example the image "baboon" was quantized to only have a maximum color count of 64</p>
+                </div>
+                <div>
+                <img src="{{ url_for('static', filename='images/baboon.png') }}" id="airplane">
+                </div>
+                <div>
+                <img src="{{ url_for('static', filename='images/baboonQuantized.jfif') }}" id="airplaneQuantized">
+                </div>
+            </div>
+        </div>
+        <div id="sourceSeparate"></div>
+        <h1 id="sources">Sources</h1>
+        <div id="sourceContainer">
+            <div id="sourceSub">
+            <div id="source">
+                <h1>Algorithm was implemented based on:</h1>
+                <a href="https://faculty.uca.edu/ecelebi/documents/IMAVIS_2011.pdf"> Celebi. Emre M. (2010). Improving the performance of k-means for color quantization. Retrieved from https://faculty.uca.edu/ecelebi/documents/IMAVIS_2011.pdf</a>
+
+                <h1 id="github">Github Repository:</h1>
+                <a href="https://github.com/MatthewAdrianChua/color-quantization"> https://github.com/MatthewAdrianChua/color-quantization</a>
+            </div>
+        </div>
+        </div>
+    </div>
+    <footer id="teamContainer">
+        <h1>Team Members</h1>
+        <div id="teams">
+            <h2>Chua, Matthew Adrian Uy</h2>
+            <h2>Gonzales, Migui</h2>
+            <h2>Binalla, Nathania Izabel</h2>
+            <h2>Aquino, Melanie</h2>
+            <h2>Pineda, John Matthew Kenneth</h2>
+        </div>
+    </footer>
+</div>
 </body>
+<script type="text/javascript">// <![CDATA[
+    const loading = document.querySelector('#loading');
+    const download = document.querySelector('#download')
+    submit.addEventListener('click', (e) => {
+        loading.style.display = 'block';
+        download.disabled = true
+    })
+// ]]></script>
 </html>
