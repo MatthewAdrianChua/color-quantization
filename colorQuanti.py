@@ -30,7 +30,7 @@ import base64
 import os
 
 app = Flask(__name__)
-app.config['MAX_CONTENT_LENGTH'] = 70 * 1024 
+app.config['MAX_CONTENT_LENGTH'] = 150 * 1024 
 
 def subsample_data(image):
     # 2:1 subsampling in horizontal and vertical directions
