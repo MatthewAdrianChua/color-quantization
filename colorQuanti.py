@@ -175,8 +175,6 @@ def upload_file():
 
 @app.route('/download', methods=['POST'])
 def download_file():
-    # Read the quantized image file
-    cv2.imwrite('quantized_image.jpg', cv2.cvtColor(less_colors, cv2.COLOR_RGB2BGR))
 
     return send_file('quantized_image.jpg', as_attachment=True)
 
