@@ -1,5 +1,7 @@
 numpy
-scikit-image
 scikit-learn
-flask
+scikit-image
+matplotlib
+Flask
 opencv-python-headless
+gunicorn
